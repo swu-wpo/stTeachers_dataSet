@@ -5,10 +5,7 @@ from pymediainfo import MediaInfo
 from aip import AipSpeech
 import time
 
-
 # 百度api语音识别
-
-
 def vedio_to_pcm(file):
     inputfile = file
     file_type = file.split('.')[-1]
