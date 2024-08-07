@@ -106,7 +106,8 @@ class RequestApi(object):
                 results = re.findall(r"\"onebest\":\"(.+?)\",", result['data'])
                 print(results)
                 upload_file_path = self.upload_file_path
-                with open(str(upload_file_path) + ".txt", "a", encoding='utf-8') as f:
+                with open(str("../rawData/text/" + os.path.splitext(os.path.basename(upload_file_path))[0]) + ".txt", "a",
+                          encoding='utf-8') as f:
                     for i in results:
                         f.write(i)
             print("{} success:".format(apiname) + str(result))
@@ -180,13 +181,14 @@ class RequestApi(object):
 
 
 if __name__ == '__main__':
-    audioPath = r"../rawData/audio"  # 待读取的文件夹 需要修改为自己的
+    audioPath = r"../rawData/audio"  # 待读取的音频文件夹
     audioPathList = os.listdir(audioPath)
     audioPathList.sort()  # 对读取的路径进行排序
-    # for filename in audioPathList:
-    #     if filename.endswith(".mp3"):
-    #         # 输入自己的id和key
-    #         api = RequestApi(appid="c2d804e7", secret_key="2091ae08b587fd4d785a5bacb27ab21a", upload_file_path=audioPath + "/" + filename)
-    #         api.all_api_request()
-    api = RequestApi(appid="c2d804e7", secret_key="2091ae08b587fd4d785a5bacb27ab21a", upload_file_path=audioPath + "/" + "何显莉.mp3")
-    api.all_api_request()
+    for filename in audioPathList:
+        if filename.endswith(".mp3"):
+            # 输入自己的id和key
+            api = RequestApi(appid="c2d804e7", secret_key="2091ae08b587fd4d785a5bacb27ab21a",
+                             upload_file_path=audioPath + "/" + filename)
+            api.all_api_request()
+    # api = RequestApi(appid="c2d804e7", secret_key="2091ae08b587fd4d785a5bacb27ab21a", upload_file_path=audioPath + "/何显莉.mp3")
+    # api.all_api_request()
